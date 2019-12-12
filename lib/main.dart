@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyBody extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -7,7 +8,14 @@ class MyBody extends StatelessWidget {
       children: [
         new Text('Hello, World!!!'),
         new FlatButton(
-          onPressed: () {},
+          onPressed: () async {
+            const url = 'https://google.com';
+            if (await canLaunch(url)) {
+              await launch(url);
+            } else {
+              throw 'Could not launch $url';
+            }
+          },
           child: Text('open site'),
           color: Colors.red,
           textColor: Colors.white,
